@@ -58,29 +58,7 @@
             );
         }
 
-        /* ============ GLITCH FLASH ============ */
-        .glitch-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 99;
-            pointer-events: none;
-            opacity: 0;
-            mix-blend-mode: screen;
-        }
-
-        .glitch-overlay.flash {
-            animation: glitchFlash 0.15s ease-out;
-        }
-
-        @keyframes glitchFlash {
-            0% { opacity: 0; }
-            10% { opacity: 1; background: linear-gradient(180deg, transparent 40%, rgba(15, 197, 237, 0.06) 40.5%, transparent 41%); }
-            20% { opacity: 0; }
-            30% { opacity: 0.7; background: linear-gradient(180deg, transparent 70%, rgba(71, 255, 156, 0.04) 70.5%, transparent 71%); }
-            50% { opacity: 0; }
-            100% { opacity: 0; }
-        }
+        /* glitch-overlay: removed */
 
         /* ============ NAVIGATION ============ */
         nav {
@@ -195,63 +173,7 @@
             box-shadow: 0 0 30px rgba(15, 197, 237, 0.15);
         }
 
-        /* Lightning shimmer border effect */
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px;
-            right: -2px; bottom: -2px;
-            border-radius: 12px;
-            background: conic-gradient(
-                from var(--shimmer-angle, 0deg),
-                transparent 0%,
-                rgba(15, 197, 237, 0.8) 5%,
-                rgba(71, 255, 156, 0.9) 8%,
-                rgba(255, 255, 255, 1) 10%,
-                rgba(71, 255, 156, 0.8) 12%,
-                rgba(15, 197, 237, 0.6) 15%,
-                transparent 20%,
-                transparent 40%,
-                rgba(15, 197, 237, 0.5) 42%,
-                rgba(255, 255, 255, 0.8) 44%,
-                rgba(15, 197, 237, 0.5) 46%,
-                transparent 50%,
-                transparent 70%,
-                rgba(71, 255, 156, 0.4) 73%,
-                rgba(255, 255, 255, 0.6) 75%,
-                rgba(71, 255, 156, 0.3) 77%,
-                transparent 80%,
-                transparent 100%
-            );
-            z-index: -2;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            animation: shimmerSpin 0.8s linear infinite;
-        }
-
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            right: 0; bottom: 0;
-            border-radius: 10px;
-            background: inherit;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            opacity: 1;
-        }
-
-        @keyframes shimmerSpin {
-            to { --shimmer-angle: 360deg; }
-        }
-
-        @property --shimmer-angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
+        /* removed conic-gradient shimmer */
 
         /* Spark burst on click */
         .btn.spark::after {
@@ -711,7 +633,6 @@
 
     <canvas id="matrix-canvas"></canvas>
     <div class="scanlines"></div>
-    <div class="glitch-overlay" id="glitch-overlay"></div>
 
     <!-- Navigation -->
     <nav id="navbar">
@@ -931,17 +852,6 @@
         accum = Array(columns).fill(0);
     });
 
-    /* ============ GLITCH FLASH ============ */
-    const glitchEl = document.getElementById('glitch-overlay');
-    function triggerGlitch() {
-        glitchEl.classList.remove('flash');
-        void glitchEl.offsetWidth;
-        glitchEl.classList.add('flash');
-        setTimeout(() => glitchEl.classList.remove('flash'), 200);
-    }
-    setInterval(() => {
-        if (Math.random() < 0.3) triggerGlitch();
-    }, 5000);
 
     /* ============ NAV SCROLL ============ */
     window.addEventListener('scroll', () => {

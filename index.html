@@ -38,6 +38,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 0;
+            opacity: 0.3;
             pointer-events: none;
         }
 
@@ -872,12 +873,18 @@
     const binary = '01';
     const chars = katakana + binary;
     const fontSize = 14;
-    let columns = Math.floor(canvas.width / fontSize);
+    const colSpacing = 28;
+    let columns = Math.floor(canvas.width / colSpacing);
     let drops = Array(columns).fill(1);
     let speeds = Array(columns).fill(0).map(() => 0.3 + Math.random() * 0.7);
     let accum = Array(columns).fill(0);
-    // Track a few trailing chars per column for the spark-fade effect
-    let trails = Array.from({length: columns}, () => []);
+
+    function getCharColor() {
+        const r = Math.random();
+        if (r < 0.15) return 'rgba(15, 197, 237, 0.7)';
+        if (r < 0.25) return 'rgba(71, 255, 156, 0.6)';
+        return 'rgba(0, 255, 65, 0.45)';
+    }
 
     function drawMatrix() {
         ctx.fillStyle = 'rgba(1, 20, 35, 0.08)';
@@ -890,59 +897,26 @@
             accum[i] = 0;
 
             const char = chars[Math.floor(Math.random() * chars.length)];
-            const y = drops[i] * fontSize;
 
-            // Occasional soft cyan glow on lead char
             if (Math.random() < 0.1) {
-                ctx.shadowColor = 'rgba(15, 197, 237, 0.5)';
-                ctx.shadowBlur = 8;
+                ctx.shadowColor = 'rgba(15, 197, 237, 0.4)';
+                ctx.shadowBlur = 6;
             } else {
                 ctx.shadowColor = 'transparent';
                 ctx.shadowBlur = 0;
             }
 
-            // Lead character color
-            const r = Math.random();
-            if (r < 0.15) {
-                ctx.fillStyle = 'rgba(15, 197, 237, 0.9)';
-            } else if (r < 0.25) {
-                ctx.fillStyle = 'rgba(71, 255, 156, 0.8)';
-            } else {
-                ctx.fillStyle = 'rgba(0, 255, 65, 0.6)';
-            }
-            ctx.fillText(char, i * fontSize, y);
+            ctx.fillStyle = getCharColor();
+            ctx.fillText(char, i * colSpacing, drops[i] * fontSize);
 
-            // Bright white lead tip (rare)
             if (Math.random() < 0.02) {
-                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-                ctx.fillText(char, i * fontSize, y);
-            }
-
-            // Record trail position
-            trails[i].push({ y: y, life: 1.0, char: char });
-
-            // Draw sparky fading trail — chars flicker and dim as they age
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-            for (let t = trails[i].length - 1; t >= 0; t--) {
-                const tr = trails[i][t];
-                tr.life -= 0.06 + Math.random() * 0.03; // uneven decay = sparkle
-                if (tr.life <= 0) { trails[i].splice(t, 1); continue; }
-
-                // Occasional tiny flicker: char briefly brightens before dying
-                const flicker = (tr.life < 0.35 && Math.random() < 0.12);
-                const alpha = flicker ? Math.min(tr.life + 0.3, 0.7) : tr.life * 0.4;
-
-                ctx.fillStyle = flicker
-                    ? `rgba(15, 197, 237, ${alpha})`
-                    : `rgba(0, 255, 65, ${alpha})`;
-                ctx.fillText(tr.char, i * fontSize, tr.y);
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.fillText(char, i * colSpacing, drops[i] * fontSize);
             }
 
             if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
                 speeds[i] = 0.3 + Math.random() * 0.7;
-                trails[i] = [];
             }
             drops[i]++;
         }
@@ -951,11 +925,10 @@
     setInterval(drawMatrix, 45);
 
     window.addEventListener('resize', () => {
-        columns = Math.floor(canvas.width / fontSize);
+        columns = Math.floor(canvas.width / colSpacing);
         drops = Array(columns).fill(1);
         speeds = Array(columns).fill(0).map(() => 0.3 + Math.random() * 0.7);
         accum = Array(columns).fill(0);
-        trails = Array.from({length: columns}, () => []);
     });
 
     /* ============ GLITCH FLASH ============ */

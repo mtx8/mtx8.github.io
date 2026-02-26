@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTX</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,7 +16,7 @@
             --green: #47FF9C;
             --matrix-green: #00ff41;
             --text: #CBE0F0;
-            --text-dim: #5a7a8a;
+            --text-dim: #8ba3b3;
             --purple: #A277FF;
             --red: #E52E2E;
             --amber: #FFE073;
@@ -273,11 +273,13 @@
         }
 
         .hero-tagline {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
             color: var(--text-dim);
-            font-weight: 300;
-            max-width: 550px;
-            line-height: 1.9;
+            font-weight: 400;
+            max-width: 520px;
+            line-height: 1.8;
+            letter-spacing: 0.2px;
             margin-bottom: 3rem;
             animation: fadeInUp 0.8s ease 0.4s both;
         }
@@ -349,10 +351,13 @@
         }
 
         .section-desc {
+            font-family: 'Inter', sans-serif;
             color: var(--text-dim);
-            font-size: 1rem;
-            max-width: 550px;
-            line-height: 1.7;
+            font-size: 0.95rem;
+            font-weight: 400;
+            max-width: 520px;
+            line-height: 1.75;
+            letter-spacing: 0.2px;
             margin-bottom: 3rem;
         }
 
@@ -396,6 +401,12 @@
             opacity: 1;
         }
 
+        a.card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
         .project-icon {
             width: 42px; height: 42px;
             border-radius: 10px;
@@ -415,9 +426,12 @@
         }
 
         .project-card p {
+            font-family: 'Inter', sans-serif;
             color: var(--text-dim);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.88rem;
+            font-weight: 400;
+            line-height: 1.65;
+            letter-spacing: 0.15px;
             margin-bottom: 1.2rem;
         }
 
@@ -453,9 +467,12 @@
         }
 
         .about-text {
+            font-family: 'Inter', sans-serif;
             color: var(--text-dim);
-            font-size: 1rem;
-            line-height: 1.9;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: 0.2px;
         }
 
         .about-text p { margin-bottom: 1.2rem; }
@@ -681,42 +698,54 @@
         </div>
 
         <div class="projects-grid">
-            <div class="project-card card-cyan reveal">
-                <div class="project-icon">&#x1F9E0;</div>
-                <h3>CORTEX</h3>
-                <p>An AI-powered autonomous trading platform that thinks, scans, and executes on its own.</p>
-                <div class="project-tags"><span>AI</span><span>Trading</span><span>Autonomous</span></div>
-            </div>
-            <div class="project-card card-green reveal">
-                <div class="project-icon">&#x1F3AC;</div>
-                <h3>StreamO</h3>
-                <p>Live shopping meets social streaming. A new way to discover, watch, and buy.</p>
-                <div class="project-tags"><span>iOS</span><span>Livestream</span><span>Commerce</span></div>
-            </div>
-            <div class="project-card card-red reveal">
-                <div class="project-icon">&#x1F6E1;</div>
-                <h3>ZeroAds</h3>
-                <p>Network-wide ad blocker that protects every device on your network. No more ads, anywhere.</p>
-                <div class="project-tags"><span>Privacy</span><span>Security</span><span>Network</span></div>
-            </div>
-            <div class="project-card card-purple reveal">
-                <div class="project-icon">&#x1F5A5;</div>
-                <h3>CoolNight Terminal</h3>
-                <p>A beautiful macOS terminal with Matrix rain effects and a one-click installer.</p>
-                <div class="project-tags"><span>Terminal</span><span>Matrix</span><span>macOS</span></div>
-            </div>
-            <div class="project-card card-amber reveal">
-                <div class="project-icon">&#x1F4CA;</div>
-                <h3>NexusBI</h3>
-                <p>Business intelligence dashboards that turn raw data into clear, actionable insights.</p>
-                <div class="project-tags"><span>Analytics</span><span>Dashboards</span><span>Data</span></div>
-            </div>
-            <div class="project-card card-cyan reveal">
-                <div class="project-icon">&#x1F4AC;</div>
-                <h3>Chesty</h3>
-                <p>An AI companion with voice and personality. Talk to it, ask it anything.</p>
-                <div class="project-tags"><span>AI Chat</span><span>Voice</span><span>iOS</span></div>
-            </div>
+            <a href="https://github.com/mtx8/cortex" target="_blank" rel="noopener" class="card-link">
+                <div class="project-card card-cyan reveal">
+                    <div class="project-icon">&#x1F9E0;</div>
+                    <h3>CORTEX</h3>
+                    <p>An AI-powered autonomous trading platform that thinks, scans, and executes on its own.</p>
+                    <div class="project-tags"><span>AI</span><span>Trading</span><span>Autonomous</span></div>
+                </div>
+            </a>
+            <a href="https://github.com/mtx8/streamo" target="_blank" rel="noopener" class="card-link">
+                <div class="project-card card-green reveal">
+                    <div class="project-icon">&#x1F3AC;</div>
+                    <h3>StreamO</h3>
+                    <p>Live shopping meets social streaming. A new way to discover, watch, and buy.</p>
+                    <div class="project-tags"><span>iOS</span><span>Livestream</span><span>Commerce</span></div>
+                </div>
+            </a>
+            <a href="https://github.com/mtx8/zeroads" target="_blank" rel="noopener" class="card-link">
+                <div class="project-card card-red reveal">
+                    <div class="project-icon">&#x1F6E1;</div>
+                    <h3>ZeroAds</h3>
+                    <p>Network-wide ad blocker that protects every device on your network. No more ads, anywhere.</p>
+                    <div class="project-tags"><span>Privacy</span><span>Security</span><span>Network</span></div>
+                </div>
+            </a>
+            <a href="https://github.com/mtx8/coolnight-terminal" target="_blank" rel="noopener" class="card-link">
+                <div class="project-card card-purple reveal">
+                    <div class="project-icon">&#x1F5A5;</div>
+                    <h3>CoolNight Terminal</h3>
+                    <p>A beautiful macOS terminal with Matrix rain effects and a one-click installer.</p>
+                    <div class="project-tags"><span>Terminal</span><span>Matrix</span><span>macOS</span></div>
+                </div>
+            </a>
+            <a href="https://github.com/mtx8/NexusBI" target="_blank" rel="noopener" class="card-link">
+                <div class="project-card card-amber reveal">
+                    <div class="project-icon">&#x1F4CA;</div>
+                    <h3>NexusBI</h3>
+                    <p>Business intelligence dashboards that turn raw data into clear, actionable insights.</p>
+                    <div class="project-tags"><span>Analytics</span><span>Dashboards</span><span>Data</span></div>
+                </div>
+            </a>
+            <a href="https://github.com/mtx8/chesty" target="_blank" rel="noopener" class="card-link">
+                <div class="project-card card-cyan reveal">
+                    <div class="project-icon">&#x1F4AC;</div>
+                    <h3>Chesty</h3>
+                    <p>An AI companion with voice and personality. Talk to it, ask it anything.</p>
+                    <div class="project-tags"><span>AI Chat</span><span>Voice</span><span>iOS</span></div>
+                </div>
+            </a>
         </div>
     </section>
 
